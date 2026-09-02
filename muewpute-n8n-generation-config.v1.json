@@ -1,0 +1,151 @@
+{
+	"schemaVersion": 1,
+	"inputProfiles": [
+		{
+			"id": "image-legacy-v1",
+			"label": "Image",
+			"contentType": "image",
+			"active": true,
+			"requestContract": "legacy-v1",
+			"fields": [],
+			"modelSelection": { "mode": "automatic", "defaultModel": "picture" }
+		},
+		{
+			"id": "audio-legacy-v1",
+			"label": "Audio",
+			"contentType": "audio",
+			"active": true,
+			"requestContract": "legacy-v1",
+			"fields": [],
+			"modelSelection": { "mode": "automatic", "defaultModel": "audio" }
+		},
+		{
+			"id": "video-legacy-v1",
+			"label": "Video",
+			"contentType": "video",
+			"active": true,
+			"requestContract": "legacy-v1",
+			"fields": [],
+			"modelSelection": { "mode": "automatic", "defaultModel": "video" }
+		},
+		{
+			"id": "text-to-image-v1",
+			"label": "Text to Image",
+			"contentType": "image",
+			"active": false,
+			"requestContract": "generation-inputs-v1",
+			"fields": [
+				{ "id": "prompt", "required": true, "maxLength": 1500 },
+				{ "id": "imageReferences", "required": false, "maxItems": 9 }
+			],
+			"modelSelection": { "mode": "automatic", "defaultModel": "picture" }
+		},
+		{
+			"id": "text-to-speech-v1",
+			"label": "Text to Speech",
+			"contentType": "audio",
+			"active": false,
+			"requestContract": "generation-inputs-v1",
+			"fields": [
+				{ "id": "text", "required": true, "maxLength": 10000 }
+			],
+			"modelSelection": { "mode": "automatic", "defaultModel": "audio" }
+		},
+		{
+			"id": "text-to-video-v1",
+			"label": "Text to Video",
+			"contentType": "video",
+			"active": false,
+			"requestContract": "generation-inputs-v1",
+			"fields": [
+				{ "id": "prompt", "required": true, "maxLength": 2000 }
+			],
+			"modelSelection": { "mode": "automatic", "defaultModel": "video" }
+		},
+		{
+			"id": "first-frame-video-v1",
+			"label": "First Frame Video",
+			"contentType": "video",
+			"active": false,
+			"requestContract": "generation-inputs-v1",
+			"fields": [
+				{ "id": "prompt", "required": false, "maxLength": 2000 },
+				{ "id": "firstFrame", "required": true, "maxItems": 1 }
+			],
+			"modelSelection": { "mode": "automatic", "defaultModel": "video" }
+		},
+		{
+			"id": "first-last-frame-video-v1",
+			"label": "First and Last Frame Video",
+			"contentType": "video",
+			"active": false,
+			"requestContract": "generation-inputs-v1",
+			"fields": [
+				{ "id": "prompt", "required": false, "maxLength": 2000 },
+				{ "id": "firstFrame", "required": true, "maxItems": 1 },
+				{ "id": "lastFrame", "required": true, "maxItems": 1 }
+			],
+			"modelSelection": { "mode": "automatic", "defaultModel": "video" }
+		},
+		{
+			"id": "image-reference-video-v1",
+			"label": "Image Reference Video",
+			"contentType": "video",
+			"active": false,
+			"requestContract": "generation-inputs-v1",
+			"fields": [
+				{ "id": "prompt", "required": true, "maxLength": 2000 },
+				{ "id": "imageReferences", "required": true, "maxItems": 9 }
+			],
+			"modelSelection": { "mode": "automatic", "defaultModel": "video" }
+		},
+		{
+			"id": "video-reference-v1",
+			"label": "Video Reference",
+			"contentType": "video",
+			"active": false,
+			"requestContract": "generation-inputs-v1",
+			"fields": [
+				{ "id": "prompt", "required": true, "maxLength": 2000 },
+				{ "id": "videoReferences", "required": true, "maxItems": 4 }
+			],
+			"modelSelection": { "mode": "automatic", "defaultModel": "video-reference-model-v1" }
+		}
+	],
+	"models": [
+		{
+			"id": "picture",
+			"label": "Image",
+			"contentType": "image",
+			"active": true,
+			"inputProfiles": ["image-legacy-v1", "text-to-image-v1"]
+		},
+		{
+			"id": "audio",
+			"label": "Audio",
+			"contentType": "audio",
+			"active": true,
+			"inputProfiles": ["audio-legacy-v1", "text-to-speech-v1"]
+		},
+		{
+			"id": "video",
+			"label": "Video",
+			"contentType": "video",
+			"active": true,
+			"inputProfiles": [
+				"video-legacy-v1",
+				"text-to-video-v1",
+				"first-frame-video-v1",
+				"first-last-frame-video-v1",
+				"image-reference-video-v1"
+			]
+		},
+		{
+			"id": "video-reference-model-v1",
+			"label": "Reference Video",
+			"contentType": "video",
+			"active": false,
+			"inputProfiles": ["text-to-video-v1", "video-reference-v1"]
+		}
+	]
+}
